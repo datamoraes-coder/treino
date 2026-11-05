@@ -62,6 +62,7 @@ nav button.done b::after{content:" ✓"}
 .mh{display:flex;justify-content:space-between;align-items:center}
 .li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd);font-size:14px}
 .card h3{margin:0 0 6px;font-size:15px}
+.vd{display:inline-block;margin-top:6px;padding:6px 10px;border-radius:10px;background:var(--bg);border:1px solid var(--bd);color:var(--ac);font-size:13px;font-weight:600;text-decoration:none}
 .ok2{margin:8px 16px;padding:14px;border-radius:14px;background:var(--ok);color:var(--ac2);font-weight:700}
 .er{margin:0 16px 8px;padding:10px 12px;border-radius:12px;background:#e03131;color:#fff;font-size:14px}
 </style>
@@ -96,7 +97,7 @@ function render(){var d=D[S.d];nav();document.getElementById("dn").textContent=d
 var c=cnt(S.d);document.getElementById("pb").style.width=(c[1]?c[0]/c[1]*100:0)+"%";
 var h="";if(!d.e.length)h='<div class="rd">😴<br>Dia de descanso.<br>É aqui que o músculo cresce. Caminhada leve ou alongamento são bem-vindos.</div>';
 d.e.forEach(function(x,j){var all=true,sb="";for(var k=0;k<x[1];k++){var on=S.done[S.d+"-"+j+"-"+k];if(!on)all=false;sb+='<button data-j="'+j+'" data-k="'+k+'" class="'+(on?"on":"")+'">'+(k+1)+'</button>'}
-h+='<div class="card'+(all?" fin":"")+'"><div class="t"><strong>'+(j+1)+'. '+x[0]+'</strong></div><div class="meta">'+x[1]+' x '+x[2]+(x[3]?' · descanso '+(x[3]>=60?(x[3]/60).toString().replace(".",",")+' min':x[3]+' s'):'')+'</div><div class="sets">'+sb+'</div><div class="row"><input type="number" inputmode="decimal" placeholder="kg" data-j="'+j+'"'+(S.miss&&S.sess&&S.sess.day===S.d&&S.miss.indexOf(j+1)>-1?' style="border-color:#e03131;border-width:2px"':'')+' value="'+(S.kg[S.d+"-"+j]||"")+'"><span class="sub">'+ll(S.d,j)+'</span>'+(x[3]?'<button class="rest" data-r="'+x[3]+'">⏱ Descanso</button>':'')+'</div></div>'});
+h+='<div class="card'+(all?" fin":"")+'"><div class="t"><strong>'+(j+1)+'. '+x[0]+'</strong></div><a class="vd" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query='+encodeURIComponent(x[0].replace(/\s*\(.*?\)/g,"")+" como fazer execução correta")+'">▶ Ver vídeo de como fazer</a><div class="meta">'+x[1]+' x '+x[2]+(x[3]?' · descanso '+(x[3]>=60?(x[3]/60).toString().replace(".",",")+' min':x[3]+' s'):'')+'</div><div class="sets">'+sb+'</div><div class="row"><input type="number" inputmode="decimal" placeholder="kg" data-j="'+j+'"'+(S.miss&&S.sess&&S.sess.day===S.d&&S.miss.indexOf(j+1)>-1?' style="border-color:#e03131;border-width:2px"':'')+' value="'+(S.kg[S.d+"-"+j]||"")+'"><span class="sub">'+ll(S.d,j)+'</span>'+(x[3]?'<button class="rest" data-r="'+x[3]+'">⏱ Descanso</button>':'')+'</div></div>'});
 document.getElementById("ls").innerHTML=h;sbar()}
 document.getElementById("nav").onclick=function(e){var b=e.target.closest("button");if(b){S.d=+b.dataset.i;render()}};
 document.getElementById("ls").onclick=function(e){var b=e.target.closest("button");if(!b)return;
